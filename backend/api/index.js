@@ -1,8 +1,9 @@
-const express = require("express")
+// api/login.js
+const express = require("express");
 const cors = require("cors");
-const app = express();
 
-app.use(cors())
+const app = express();
+app.use(cors());
 
 // Set up the login credentials
 const username = "kavya";
@@ -17,11 +18,11 @@ app.post("/login", function (req, res) {
     if (req.body.username === username && req.body.password === password) {
         res.send("Login Success");
     } else {
-        res.send("Login Failed"); 
+        res.send("Login Failed");
     }
 });
 
-// Start the server on port 5000
-app.listen(5000, function () {
-  console.log("Server started on port 5000...");
-});
+// Export the app to work with Vercel serverless functions
+module.exports = (req, res) => {
+  app(req, res);
+};
