@@ -19,7 +19,9 @@ function App() {
 
   function check() {
     // Change the URL to point to the correct port (5000)
-    var logindetails = axios.post('https://vercel.com/kavyas-projects-fffd4e21/backend-login/GH2kUEkQc9CxekoaCJyxmYeDxYfz');
+    var logindetails = axios.post('https://backend-login-ecru.vercel.app/', {
+      username: user,
+      password: pass,})
     
     logindetails.then(function (data) {
       // Handle the response from the server
