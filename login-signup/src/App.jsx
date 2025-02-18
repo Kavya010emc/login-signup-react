@@ -19,7 +19,7 @@ function App() {
 
   function check() {
     // Change the URL to point to the correct port (5000)
-    var logindetails = axios.post("https://localhost:5000/login", {
+    var logindetails = axios.post("http://localhost:5000/login", {
       username: user,
       password: pass,})
     
