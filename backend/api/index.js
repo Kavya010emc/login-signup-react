@@ -1,31 +1,28 @@
-const app = express(); 
+const express = require('express');
+const cors = require("cors")
 
-app.use(cors());
-app.use(express.json()); 
-app.use(express.urlencoded({ extended: true })); 
+const server = express();
 
-// Test Route
-app.get("/", (req, res) => {
-  res.send("Backend is working!");
+const username = "kavya"
+const password = "1414";
+
+server.use(cors());
+server.use(express.json());
+server.use(express.urlencoded({ extended: true }));
+
+server.listen(3000);
+
+server.get("/", (req, res) => {
+    res.send("Server running....")
 });
 
-// Login API Route
-app.post("/api/login", (req, res) => {
-  const { username, password } = req.body;
+server.post('/login', (req, res) => {
 
-  if (!username || !password) {
-    return res.status(400).json({ message: "Username and password are required" });
-  }
-
-  const storedUsername = process.env.USERNAME || "kavya";
-  const storedPassword = process.env.PASSWORD || "1234";
-
-  if (username === storedUsername && password === storedPassword) {
-    return res.status(200).json({ message: "Login Success" });
-  } else {
-    return res.status(401).json({ message: "Login Failed" });
-  }
-});
-
-// Export for Vercel
-module.exports = app;
+    if(req.body.username === username && req.body.password === password){
+        res.send(true);
+    }
+    else{
+        res.send(false)
+    }
+    
+})
