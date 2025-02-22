@@ -3,11 +3,9 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 function App() {
-
-
   const [user, setUser] = useState("");
   const [pass, setPass] = useState("");
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   function handleUser(evt) {
     setUser(evt.target.value);
@@ -17,22 +15,25 @@ function App() {
     setPass(evt.target.value);
   }
 
-  function check() {
-    // Change the URL to point to the correct port (5000)
-    var logindetails = axios.post("http://localhost:5000/login", {
-      username: user,
-      password: pass,})
-    
-    logindetails.then(function (data) {
-      // Handle the response from the server
-      if (data.data === "Login Success") {
-       navigate("/sucess")
+  async function check() {
+    try {
+      const response = await axios.post(
+        import.meta.env.VITE_BACKEND_URL + "/api/login", // Use environment variable
+        {
+          username: user,
+          password: pass,
+        }
+      );
+
+      // Check response message correctly
+      if (response.data.message === "Login Success") {
+        navigate("/success");
       } else {
-        navigate("/fail")
+        navigate("/fail");
       }
-    }).catch(function(error) {
+    } catch (error) {
       console.error("Error logging in:", error);
-    });
+    }
   }
 
   return (
@@ -49,19 +50,23 @@ function App() {
         />
         <input
           onChange={handlePass}
-          type="password" // changed from type="text"
+          type="password"
           placeholder="Password"
           name="password"
           className="w-full p-3 border border-gray-300 rounded mb-3"
           value={pass}
         />
-        <button onClick={check}
+        <button
+          onClick={check}
           className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 cursor-pointer rounded transition"
         >
           Log In
         </button>
-        
-        <p className="text-1xl mb-6 text-center">Don't Have an Account? <a className="text-blue-600 cursor-pointer">Signup</a></p>
+
+        <p className="text-1xl mb-6 text-center">
+          Don't Have an Account?{" "}
+          <a className="text-blue-600 cursor-pointer">Signup</a>
+        </p>
       </div>
     </div>
   );
