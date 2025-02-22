@@ -44,7 +44,6 @@ function App() {
           onChange={handleUser}
           type="text"
           placeholder="Username"
-          name="username"
           className="w-full p-3 border border-gray-300 rounded mb-3"
           value={user}
         />
@@ -52,7 +51,6 @@ function App() {
           onChange={handlePass}
           type="password"
           placeholder="Password"
-          name="password"
           className="w-full p-3 border border-gray-300 rounded mb-3"
           value={pass}
         />
@@ -64,8 +62,7 @@ function App() {
         </button>
 
         <p className="text-1xl mb-6 text-center">
-          Don't Have an Account?{" "}
-          <a className="text-blue-600 cursor-pointer">Signup</a>
+          Don't Have an Account? <a className="text-blue-600 cursor-pointer">Signup</a>
         </p>
       </div>
     </div>
